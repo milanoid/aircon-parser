@@ -3,7 +3,13 @@ class PassengerParser:
     def __init__(self, string_to_parse):
         self.string_to_parse = string_to_parse
         self.last_name, self.first_name = self.string_to_parse.split("/")
-        self.last_name = self.last_name.strip("1")
+        # infant detection
+        if self.last_name.startswith("2"):
+            self.last_name = self.last_name.strip("2")  # parent
+            self.has_infant = True
+        else:
+            self.has_infant = False
+            self.last_name = self.last_name.strip("1")
         self.gender = self.get_gender_and_strip_gender_from_first_name()
 
     def get_gender_and_strip_gender_from_first_name(self):
@@ -24,25 +30,25 @@ class PassengerParser:
             return "?"
 
 
+class InfantParser:
+
+    def __init__(self, string_to_parse):
+        self.last_name, self.first_name = string_to_parse.split("/")
+
+
 class HeaderParser:
 
     def __init__(self, string_to_parse):
-        self.header_to_parse = string_to_parse
+        self.string_to_parse = string_to_parse
         self.routing = self.get_routing()
-        self.flight_date = self.get_flight_number()
+        self.flight_date = self.get_date_of_flight()
         self.flight_number = self.get_flight_number()
 
-    @staticmethod
-    def get_routing():
-        # todo
-        return "FCO-BIO"
+    def get_routing(self):
+        return self.string_to_parse.split(" / ")[0]
 
-    @staticmethod
-    def get_date_of_flight():
-        # todo
-        return "2018-5-25"
+    def get_date_of_flight(self):
+        return self.string_to_parse.split(" / ")[1].split(" ")[2]
 
-    @staticmethod
-    def get_flight_number():
-        # todo
-        return "ENT882"
+    def get_flight_number(self):
+        return self.string_to_parse.split(" / ")[1][:7].strip(" ")
