@@ -48,7 +48,8 @@ class HeaderParser:
         return self.string_to_parse.split(" / ")[0]
 
     def get_date_of_flight(self):
-        return self.string_to_parse.split(" / ")[1].split(" ")[2]
+        day, month, year = self.string_to_parse.split(" / ")[1].split(" ")[2].split("/")
+        return "20{}/{}/{}".format(year, month, day)
 
     def get_flight_number(self):
-        return self.string_to_parse.split(" / ")[1][:7].strip(" ")
+        return self.string_to_parse.split(" / ")[1][:7].strip(" ").replace(" ","")

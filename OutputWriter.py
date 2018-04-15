@@ -27,9 +27,9 @@ class OutputWriter:
         return self
 
     def write_header(self):
-        self.destination_workbook.active.cell(2, 2).value = self.header.routing
-        self.destination_workbook.active.cell(2, 3).value = self.header.flight_date
-        self.destination_workbook.active.cell(2, 4).value = self.header.flight_number
+        self.destination_workbook.active.cell(2, 3).value = self.header.routing
+        self.destination_workbook.active.cell(2, 4).value = self.header.flight_date
+        self.destination_workbook.active.cell(2, 5).value = self.header.flight_number
 
         # e.g. 183 (adults) + 1 (infant)
         infants = 0
