@@ -7,7 +7,7 @@ class OutputWriter:
         self.passengers = passengers
         self.header = header
         self.filename = filename
-        self.destination_workbook = load_workbook(self.filename)
+        self.destination_workbook = load_workbook("output_template.xlsx")
 
     def write_passengers(self):
         i = 5  # first passenger starts on row 5
